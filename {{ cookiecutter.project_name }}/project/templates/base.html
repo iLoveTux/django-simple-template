@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css">
+    <title>{% block title %}My Project{% endblock %}</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'landing_page' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="#">👤 ▼</a>
+                        <ul>
+                            <li><a</ul> href="{% url 'profile' %}">Profile</a></li>
+                            <form method="post" action="{% url 'logout' %}" class="logout-form">
+                                {% csrf_token %}
+                                <button type="submit" class="link-button">Logout</button>
+                            </form>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <h1>Welcome to My Project</h1>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2025 My Project</p>
+    </footer>
+</body>
+</html>
