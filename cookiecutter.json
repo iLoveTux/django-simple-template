@@ -1,8 +1,8 @@
 {
   "project_name": "myproject",
   "_copy_without_render": [
-    "{{ cookiecutter.project_name }}/project/templates/*.html",
-    "{{ cookiecutter.project_name }}/project/templates/registration/*.html",
+    "project/templates/*.html",
+    "project/templates/registration/*.html",
     "README.md"
   ]
 }
