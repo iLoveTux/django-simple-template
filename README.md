@@ -85,7 +85,7 @@ Welcome to the **Django Simple Template**, a minimal and "future-proof" Django p
 
 ## Security Notes
 
-- All forms use `{% csrf_token %}` for CSRF protection.
+- All forms use `csrf_token` for CSRF protection.
 - Logout is POST-only for security.
 - No sensitive data is included in the repository.
 
