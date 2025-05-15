@@ -100,7 +100,7 @@ python manage.py serve
 
 ## Security Notes
 
-- All forms use `{% csrf_token %}`
+- All forms use `csrf_token` for CSRF protection.
 - Logout is POST-only
 - No sensitive data is included in the repository
 
