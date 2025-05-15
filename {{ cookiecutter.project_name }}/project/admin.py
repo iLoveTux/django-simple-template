@@ -5,5 +5,5 @@ from .models import (
     UserProfile,
 )
 
-admin.site.site.register(CustomUser)
-admin.site.site.register(UserProfile)
+admin.site.register(CustomUser)
+admin.site.register(UserProfile)
