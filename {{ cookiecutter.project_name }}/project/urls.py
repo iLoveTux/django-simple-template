@@ -2,6 +2,9 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import PasswordResetView, LogoutView
 from .views import landing_page, profile_view, register
+{%- if cookiecutter.use_djstripe == 'y' -%}
+from .views import subscription_view, create_checkout_session
+{%- endif -%}
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
@@ -16,4 +19,8 @@ urlpatterns = [
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('profile/', profile_view, name='profile'),
     path('register/', register, name='register'),
+{%- if cookiecutter.use_djstripe == 'y' -%}
+    path('subscription/', subscription_view, name='subscription'),
+    path('create-checkout-session/<str:price_id>/', create_checkout_session, name='create_checkout_session'),
+{%- endif -%}
 ]

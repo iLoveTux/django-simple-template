@@ -16,7 +16,10 @@
                     <li>
                         <a href="#">👤 ▼</a>
                         <ul>
-                            <li><a> href="{% url 'profile' %}">Profile</a></li>
+                            <li><a href="{% url 'profile' %}">Profile</a></li>
+                            {%- if cookiecutter.use_djstripe == 'y' -%}
+                            <li><a href="{% url 'subscription' %}">Subscription</a></li>
+                            {%- endif -%}
                             <form method="post" action="{% url 'logout' %}" class="logout-form">
                                 {% csrf_token %}
                                 <button type="submit" class="link-button">Logout</button>

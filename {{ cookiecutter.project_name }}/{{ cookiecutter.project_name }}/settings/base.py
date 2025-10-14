@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'project',
     'django.contrib.admin',
+    'project',
+    {%- if cookiecutter.use_djstripe == 'y' -%}
+    'djstripe',
+    {%- endif -%}
 ]
 
 MIDDLEWARE = [
@@ -196,3 +199,11 @@ LOGGING = {
 # Log level from environment variable
 LOGGING['root']['level'] = os.getenv('DJANGO_LOG_LEVEL', 'DEBUG' if DEBUG else 'WARNING').upper()
 LOGGING['loggers']['django']['level'] = os.getenv('DJANGO_LOG_LEVEL', 'DEBUG' if DEBUG else 'WARNING').upper()
+
+{%- if cookiecutter.use_djstripe == 'y' -%}
+# dj-stripe settings
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', 'pk_test_YOUR_PUBLIC_KEY_HERE')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', 'sk_test_YOUR_SECRET_KEY_HERE')
+DJSTRIPE_WEBHOOK_SECRET = os.getenv('DJSTRIPE_WEBHOOK_SECRET', '')
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
+{%- endif -%}

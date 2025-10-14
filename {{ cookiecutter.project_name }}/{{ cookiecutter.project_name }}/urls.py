@@ -22,6 +22,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', include('project.urls')),
     path('admin/', admin.site.urls),
+    {%- if cookiecutter.use_djstripe == 'y' -%}
+    path("stripe/", include("djstripe.urls", namespace="djstripe")),
+    {%- endif -%}
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,6 @@
 {
   "project_name": "myproject",
+  "use_djstripe": "y",
   "_copy_without_render": [
     "project/templates/*.html",
     "project/templates/registration/*.html"

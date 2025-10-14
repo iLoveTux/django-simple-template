@@ -1,3 +1,6 @@
 django
 whitenoise
 cherrypy
+{%- if cookiecutter.use_djstripe == 'y' -%}
+dj-stripe
+{%- endif -%}

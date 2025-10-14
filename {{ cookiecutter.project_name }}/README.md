@@ -13,6 +13,9 @@ Welcome to your new Django project, generated from the Django Simple Template!
 - Modern, accessible navbar
 - Profile editing for users
 - Django 5.2+ and Python 3.13+ compatible
+{%- if cookiecutter.use_djstripe == 'y' -%}
+- dj-stripe integration for Stripe payments and subscriptions
+{%- endif -%}
 
 ## Getting Started
 
@@ -63,6 +66,44 @@ Welcome to your new Django project, generated from the Django Simple Template!
    python manage.py serve
    ```
    You can configure CherryPy with environment variables (see below) or command-line arguments.
+
+{%- if cookiecutter.use_djstripe == 'y' -%}
+
+## dj-stripe Setup
+
+This project includes dj-stripe for integrating Stripe payments and subscriptions.
+
+1. **Set up Stripe account**: Create a Stripe account at https://stripe.com and get your API keys from the dashboard.
+
+2. **Set environment variables**:
+   - `STRIPE_PUBLIC_KEY`: Your Stripe publishable key (starts with `pk_test_` or `pk_live_`)
+   - `STRIPE_SECRET_KEY`: Your Stripe secret key (starts with `sk_test_` or `sk_live_`)
+   - `DJSTRIPE_WEBHOOK_SECRET`: Webhook endpoint secret for handling Stripe events (optional but recommended for production)
+
+   Example (Windows):
+   ```cmd
+   set STRIPE_PUBLIC_KEY=pk_test_...
+   set STRIPE_SECRET_KEY=sk_test_...
+   set DJSTRIPE_WEBHOOK_SECRET=whsec_...
+   ```
+
+3. **Run migrations**:
+   ```bash
+   python manage.py migrate
+   ```
+
+4. **Sync Stripe data** (optional, to pull existing products/prices):
+   ```bash
+   python manage.py djstripe_sync_models
+   ```
+
+5. **Create products and prices in Stripe dashboard** or use the admin interface at `/admin/` after creating a superuser.
+
+6. **Webhook setup**: For production, set up a webhook endpoint at `https://yourdomain.com/stripe/webhook/` in Stripe dashboard, using the secret for `DJSTRIPE_WEBHOOK_SECRET`.
+
+For more information, see the [dj-stripe documentation](https://dj-stripe.readthedocs.io/).
+
+{%- endif -%}
 
 ## CherryPy Server Configuration
 
